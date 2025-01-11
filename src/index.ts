@@ -17,6 +17,21 @@
 
 import { WebClient } from './app/client/web-client';
 
+/**
+ * Creates and returns a WebClient instance for interacting with the Slack API.
+ * Slack APIのWebClientインスタンスを生成します。
+ *
+ * @param token - The Slack API authentication token
+ *               Slack APIの認証トークン
+ * @returns A configured WebClient instance
+ *          設定済みのWebClientインスタンス
+ * @example
+ * const client = createWebClient('xoxb-your-token');
+ * const response = client.chat.postMessage({
+ *   channel: '#general',
+ *   text: 'Hello!'
+ * });
+ */
 function createWebClient(token: string): WebClient {
   return new WebClient(token);
 }

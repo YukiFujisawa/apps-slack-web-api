@@ -15,20 +15,25 @@
  */
 
 import { SLACK_API } from '../constants/slack-constants';
-import { SlackApiResponse, SlackMessageOptions } from '../types/slack-types';
+import { ChatPostMessageArguments } from '../types/chat-post-message-arguments';
+import { SlackApiResponse } from '../types/slack-api-response';
+import { ApiUtil } from '../util/api-util';
 
 export class PostSlackChatMessageService {
-  static call(token: string, options: SlackMessageOptions): SlackApiResponse {
+  static call(
+    token: string,
+    messageArguments: ChatPostMessageArguments
+  ): SlackApiResponse {
     const opt: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
       method: 'post',
       payload: {
-        ...options,
+        ...messageArguments,
         token,
       },
       muteHttpExceptions: true,
     };
 
-    const response = this.executeWithRetry(() =>
+    const response = ApiUtil.executeWithRetry(() =>
       UrlFetchApp.fetch(`${SLACK_API.BASE_URI}/api/chat.postMessage`, opt)
     );
 
@@ -39,23 +44,5 @@ export class PostSlackChatMessageService {
     }
 
     return result;
-  }
-
-  private static executeWithRetry<T>(
-    fn: () => T,
-    maxRetries: number = SLACK_API.DEFAULT_MAX_RETRIES
-  ): T {
-    for (let attempt = 0; attempt < maxRetries; attempt++) {
-      try {
-        return fn();
-      } catch (error) {
-        if (attempt === maxRetries - 1) {
-          throw error;
-        }
-        const backoffMs = 1000 * Math.pow(2, attempt);
-        Utilities.sleep(backoffMs);
-      }
-    }
-    throw new Error('Max retries exceeded');
   }
 }

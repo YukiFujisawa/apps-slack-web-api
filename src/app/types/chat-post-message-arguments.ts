@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { SlackMessageOptions } from '../types/slack-types';
-
-// src/app/domain/slack-message.ts
-export class SlackMessage {
-  constructor(
-    private readonly channel: string,
-    private readonly text: string,
-    private readonly options: Partial<SlackMessageOptions> = {}
-  ) {}
-
-  toPayload(): SlackMessageOptions {
-    return {
-      channel: this.channel,
-      text: this.text,
-      ...this.options,
-    };
-  }
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface ChatPostMessageArguments {
+  channel: string;
+  text: string;
+  username?: string;
+  icon_emoji?: string;
+  icon_url?: string;
+  thread_ts?: string;
+  reply_broadcast?: boolean;
+  parse?: 'full' | 'none';
+  link_names?: boolean;
+  blocks?: any[];
+  attachments?: any[];
+  unfurl_links?: boolean;
+  unfurl_media?: boolean;
+  [key: string]: any;
 }
