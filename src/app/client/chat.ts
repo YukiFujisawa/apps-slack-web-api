@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { PostSlackChatMessageService } from '../service/post-slack-chat-message-service';
+import { SlackApiResponse, SlackMessageOptions } from '../types/slack-types';
 
-import { WebClient } from './app/client/web-client';
+export class Chat {
+  constructor(private readonly token: string) {}
 
-function createWebClient(token: string): WebClient {
-  return new WebClient(token);
+  postMessage(options: SlackMessageOptions): SlackApiResponse {
+    return PostSlackChatMessageService.call(this.token, options);
+  }
 }

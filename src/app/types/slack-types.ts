@@ -13,10 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface SlackCredential {
+  access_token: string;
+}
 
-import { WebClient } from './app/client/web-client';
+export interface SlackMessageOptions {
+  channel: string;
+  text: string;
+  username?: string;
+  icon_emoji?: string;
+  icon_url?: string;
+  thread_ts?: string;
+  reply_broadcast?: boolean;
+  parse?: 'full' | 'none';
+  link_names?: boolean;
+  blocks?: any[];
+  attachments?: any[];
+  unfurl_links?: boolean;
+  unfurl_media?: boolean;
+  [key: string]: any;
+}
 
-function createWebClient(token: string): WebClient {
-  return new WebClient(token);
+export interface SlackApiResponse {
+  ok: boolean;
+  error?: string;
+  [key: string]: any;
 }

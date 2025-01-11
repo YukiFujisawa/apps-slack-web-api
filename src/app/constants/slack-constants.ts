@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { WebClient } from './app/client/web-client';
-
-function createWebClient(token: string): WebClient {
-  return new WebClient(token);
-}
+export const SLACK_API = {
+  BASE_URI: 'https://slack.com',
+  CREDENTIAL_PREFIX: 'SLACK_credential',
+  DEFAULT_MAX_RETRIES: 3,
+} as const;

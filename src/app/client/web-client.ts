@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Chat } from './chat';
 
-import { WebClient } from './app/client/web-client';
+export class WebClient {
+  readonly chat: Chat;
 
-function createWebClient(token: string): WebClient {
-  return new WebClient(token);
+  constructor(private readonly token: string) {
+    this.chat = new Chat(token);
+  }
 }

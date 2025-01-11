@@ -13,10 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { SlackMessageOptions } from '../types/slack-types';
 
-import { WebClient } from './app/client/web-client';
+// src/app/domain/slack-message.ts
+export class SlackMessage {
+  constructor(
+    private readonly channel: string,
+    private readonly text: string,
+    private readonly options: Partial<SlackMessageOptions> = {}
+  ) {}
 
-function createWebClient(token: string): WebClient {
-  return new WebClient(token);
+  toPayload(): SlackMessageOptions {
+    return {
+      channel: this.channel,
+      text: this.text,
+      ...this.options,
+    };
+  }
 }
