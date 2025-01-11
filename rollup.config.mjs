@@ -26,7 +26,7 @@ export default {
     format: 'esm',
   },
   plugins: [
-    cleanup({ comments: 'all', extensions: ['.ts'] }),
+    cleanup({ comments: 'none', extensions: ['.ts'] }),
     license({
       banner: {
         content: {
