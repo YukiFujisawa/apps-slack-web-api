@@ -1,6 +1,6 @@
 {
   "name": "apps-slack-web-api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Slack Web API Client for GAS(Google Apps Script)",
   "main": "build/index.js",
   "license": "Apache-2.0",
