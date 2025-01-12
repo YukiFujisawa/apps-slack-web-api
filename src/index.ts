@@ -32,7 +32,7 @@ function createWebClient(token: string): WebClient {
  *
  * @example
  * // Simple text message
- * postSlackMessage(
+ * postChatMessage(
  *   'xoxb-your-token',
  *   '#general',
  *   'Hello from Google Apps Script!'
@@ -56,7 +56,7 @@ function createWebClient(token: string): WebClient {
  *   ts: Date.now() / 1000
  * }];
  *
- * postSlackMessage(
+ * SlackWebApi.postChatMessage(
  *   'xoxb-your-token',
  *   '#general',
  *   'Message with rich formatting',
@@ -65,7 +65,7 @@ function createWebClient(token: string): WebClient {
  *   }
  * );
  */
-function postSlackMessage(
+function postChatMessage(
   token: string,
   channelId: string,
   text: string,
@@ -80,14 +80,14 @@ function postSlackMessage(
 }
 
 /**
- * Tests the postSlackMessage function by sending a simple text message and a rich message with attachments.
+ * Tests the postChatMessage function by sending a simple text message and a rich message with attachments.
  */
-function testPostSlackMessage() {
+function testpostChatMessage() {
   // Send a simple text message
   const token = 'xoxb-your';
   const channelId = '#general';
   const text = 'Hello from Google Apps Script!';
-  postSlackMessage(token, channelId, text);
+  postChatMessage(token, channelId, text);
 
   // Send a rich message with attachments
   const attachmentData = [
@@ -110,7 +110,7 @@ function testPostSlackMessage() {
       ts: Date.now() / 1000,
     },
   ];
-  postSlackMessage(token, channelId, 'Message with rich formatting', {
+  postChatMessage(token, channelId, 'Message with rich formatting', {
     attachments: JSON.stringify(attachmentData),
   });
 }
