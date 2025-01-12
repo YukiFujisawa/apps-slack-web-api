@@ -19,7 +19,6 @@ TypeScript で書かれた Google Apps Script 用の Slack Web API 用のライ�
 
 ![スクリーンショット 2025-01-12 11 38 39](https://github.com/user-attachments/assets/9e357f00-99d9-4e97-b0cf-d99fe74d6871)
 
-
 ## 基本的な使い方 / Basic Usage
 
 ### シンプルなメッセージを送信 / Sending a Simple Message
@@ -78,7 +77,7 @@ function sendRichMessage() {
 ```typescript
 function useWebClient() {
   const token = 'xoxb-your-token';
-  const web = createWebClient(token);
+  const web = SlackWebApi.createWebClient(token);
 
   const response = web.chat.postMessage({
     channel: '#general',

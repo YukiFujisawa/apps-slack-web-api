@@ -5,65 +5,108 @@ import { ChatPostMessageArguments } from './app/types/chat-post-message-argument
 import { SlackApiResponse } from './app/types/slack-api-response';
 
 /**
- * Creates and returns a WebClient instance for interacting with the Slack API.
+ * <div class="method-description">
+ *   <h3>createWebClient</h3>
+ *   <p>Creates and returns a WebClient instance for interacting with the Slack API.</p>
  *
- * @param token - The Slack API authentication token
- * @returns A configured WebClient instance
- * @example
- * const web = SlackWebApi.createWebClient('xoxb-your-token');
- * const response = web.chat.postMessage({
- *   channel: '#general',
- *   text: 'Hello!'
- * });
+ *   <h4>Parameters</h4>
+ *   <ul>
+ *     <li><code>token</code> - The Slack API authentication token</li>
+ *   </ul>
+ *
+ *   <h4>Returns</h4>
+ *   <p>A configured WebClient instance</p>
+ *
+ *   <h4>Example</h4>
+ *   <pre><code>
+ * function useWebClient() {
+ *   const token = 'xoxb-your-token';
+ *   const web = createWebClient(token);
+ *
+ *   const response = web.chat.postMessage({
+ *     channel: '#general',
+ *     text: 'Hello!',
+ *   });
+ * }
+ *   </code></pre>
+ * </div>
+ *
+ * @param {string} token The Slack API authentication token
+ * @returns {Object} A configured WebClient instance
  */
 function createWebClient(token: string): WebClient {
   return new WebClient(token);
 }
 
 /**
- * Sends a message to a Slack channel with support for both simple text and rich formatting options.
- * Provides a straightforward way to post messages while maintaining flexibility for advanced features.
+ * <div class="method-description">
+ *   <h3>postChatMessage</h3>
+ *   <p>Sends a message to a Slack channel with support for both simple text and rich formatting options.
+ *   Provides a straightforward way to post messages while maintaining flexibility for advanced features.</p>
  *
- * @param token - Slack API authentication token
- * @param channelId - Target channel ID or name
- * @param text - Message text (used as fallback when attachments are provided)
- * @param options - Additional message configuration options
- * @returns The Slack API response
+ *   <h4>Parameters</h4>
+ *   <ul>
+ *     <li><code>token</code> - Slack API authentication token</li>
+ *     <li><code>channelId</code> - Target channel ID or name</li>
+ *     <li><code>text</code> - Message text (used as fallback when attachments are provided)</li>
+ *     <li><code>options</code> - Additional message configuration options</li>
+ *   </ul>
  *
- * @example
- * // Simple text message
- * postChatMessage(
- *   'xoxb-your-token',
- *   '#general',
- *   'Hello from Google Apps Script!'
- * );
+ *   <h4>Returns</h4>
+ *   <p>The Slack API response</p>
  *
- * // Rich message with attachments
- * const attachmentData = [{
- *   color: '#36a64f',
- *   pretext: 'Optional pretext that appears above the attachment',
- *   author_name: 'Author Name',
- *   author_link: 'http://example.com',
- *   title: 'Attachment Title',
- *   title_link: 'http://example.com',
- *   text: 'Main attachment text that can include *markdown*',
- *   fields: [{
- *     title: 'Field Title',
- *     value: 'Field value and formatting',
- *     short: true
- *   }],
- *   footer: 'Footer text',
- *   ts: Date.now() / 1000
- * }];
+ *   <h4>Examples</h4>
+ *   <div class="examples">
+ *     <p><strong>Sending a Simple Message:</strong></p>
+ *     <pre><code>
+ * function sendSimpleMessage() {
+ *   const token = 'xoxb-your-token';
+ *   const channelId = '#general';
+ *   const text = 'Hello from Google Apps Script!';
+ *   SlackWebApi.postChatMessage(token, channelId, text);
+ * }
+ *     </code></pre>
  *
- * SlackWebApi.postChatMessage(
- *   'xoxb-your-token',
- *   '#general',
- *   'Message with rich formatting',
- *   {
- *     attachments: JSON.stringify(attachmentData)
- *   }
- * );
+ *     <p><strong>Sending a Rich Message:</strong></p>
+ *     <pre><code>
+ * function sendRichMessage() {
+ *   const token = 'xoxb-your-token';
+ *   const channelId = '#general';
+ *   const attachmentData = [{
+ *     color: '#36a64f',
+ *     pretext: 'Optional pretext that appears above the attachment',
+ *     author_name: 'Author Name',
+ *     author_link: 'http://example.com',
+ *     title: 'Attachment Title',
+ *     title_link: 'http://example.com',
+ *     text: 'Main attachment text that can include *markdown*',
+ *     fields: [{
+ *       title: 'Field Title',
+ *       value: 'Field value and formatting',
+ *       short: true,
+ *     }],
+ *     footer: 'Footer text',
+ *     ts: Date.now() / 1000
+ *   }];
+ *
+ *   SlackWebApi.postChatMessage(
+ *     token,
+ *     channelId,
+ *     'Message with rich formatting',
+ *     {
+ *       attachments: JSON.stringify(attachmentData)
+ *     }
+ *   );
+ * }
+ *     </code></pre>
+ *   </div>
+ * </div>
+ *
+ * @param {string} token Slack API authentication token
+ * @param {string} channelId Target channel ID or name
+ * @param {string} text Message text (used as fallback when attachments are provided)
+ * @param {Object} options Additional message configuration options
+ * @returns {Object} The Slack API response
  */
 function postChatMessage(
   token: string,
@@ -78,39 +121,3 @@ function postChatMessage(
     ...options,
   });
 }
-
-/**
- * Tests the postChatMessage function by sending a simple text message and a rich message with attachments.
- */
-// function testPostChatMessage() {
-//   // Send a simple text message
-//   const token = 'xoxb-your';
-//   const channelId = '#general';
-//   const text = 'Hello from Google Apps Script!';
-//   postChatMessage(token, channelId, text);
-
-//   // Send a rich message with attachments
-//   const attachmentData = [
-//     {
-//       color: '#36a64f',
-//       pretext: 'Optional pretext that appears above the attachment',
-//       author_name: 'Author Name',
-//       author_link: 'http://example.com',
-//       title: 'Attachment Title',
-//       title_link: 'http://example.com',
-//       text: 'Main attachment text that can include *markdown*',
-//       fields: [
-//         {
-//           title: 'Field Title',
-//           value: 'Field value and formatting',
-//           short: true,
-//         },
-//       ],
-//       footer: 'Footer text',
-//       ts: Date.now() / 1000,
-//     },
-//   ];
-//   postChatMessage(token, channelId, 'Message with rich formatting', {
-//     attachments: JSON.stringify(attachmentData),
-//   });
-// }
