@@ -1,3 +1,5 @@
+import { SLACK_API } from '../constants/slack-constants';
+
 /**
  * Utility class providing common API operation functionality including retry logic
  * and exponential backoff handling for robust API interactions.
@@ -9,7 +11,7 @@ export class ApiUtil {
    * the operation with increasing delays between attempts.
    *
    * @param operation - The API operation to execute
-   * @param maxRetries - Maximum number of retry attempts (defaults to 3)
+   * @param maxRetries - Maximum number of retry attempts
    * @param initialBackoffMs - Initial backoff delay in milliseconds (defaults to 1000)
    * @returns The result of the successful operation
    * @throws {Error} If all retry attempts fail
@@ -20,7 +22,7 @@ export class ApiUtil {
    */
   static executeWithRetry<T>(
     operation: () => T,
-    maxRetries: number = 3,
+    maxRetries: number = SLACK_API.DEFAULT_MAX_RETRIES,
     initialBackoffMs: number = 1000
   ): T {
     if (maxRetries <= 0) {
