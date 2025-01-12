@@ -6,15 +6,12 @@ import { SlackApiResponse } from './app/types/slack-api-response';
 
 /**
  * Creates and returns a WebClient instance for interacting with the Slack API.
- * Slack APIのWebClientインスタンスを生成します。
  *
  * @param token - The Slack API authentication token
- *               Slack APIの認証トークン
  * @returns A configured WebClient instance
- *          設定済みのWebClientインスタンス
  * @example
- * const client = createWebClient('xoxb-your-token');
- * const response = client.chat.postMessage({
+ * const web = SlackWebApi.createWebClient('xoxb-your-token');
+ * const response = web.chat.postMessage({
  *   channel: '#general',
  *   text: 'Hello!'
  * });
@@ -24,33 +21,47 @@ function createWebClient(token: string): WebClient {
 }
 
 /**
- * シンプルなSlackメッセージ送信機能を提供します。
- * 基本的なメッセージ投稿のニーズに対応します。
+ * Sends a message to a Slack channel with support for both simple text and rich formatting options.
+ * Provides a straightforward way to post messages while maintaining flexibility for advanced features.
  *
- * @param token - Slack APIの認証トークン
- * @param channelId - 対象のチャンネルIDまたは名前
- * @param text - メッセージテキスト
- * @param options - 追加のメッセージオプション（任意）
- * @returns Slack APIのレスポンス
+ * @param token - Slack API authentication token
+ * @param channelId - Target channel ID or name
+ * @param text - Message text (used as fallback when attachments are provided)
+ * @param options - Additional message configuration options
+ * @returns The Slack API response
  *
  * @example
- * // 単純なテキストメッセージの送信
+ * // Simple text message
  * postSlackMessage(
  *   'xoxb-your-token',
  *   '#general',
- *   'GASからこんにちは！'
+ *   'Hello from Google Apps Script!'
  * );
  *
- * // アタッチメント付きメッセージの送信
+ * // Rich message with attachments
+ * const attachmentData = [{
+ *   color: '#36a64f',
+ *   pretext: 'Optional pretext that appears above the attachment',
+ *   author_name: 'Author Name',
+ *   author_link: 'http://example.com',
+ *   title: 'Attachment Title',
+ *   title_link: 'http://example.com',
+ *   text: 'Main attachment text that can include *markdown*',
+ *   fields: [{
+ *     title: 'Field Title',
+ *     value: 'Field value and formatting',
+ *     short: true
+ *   }],
+ *   footer: 'Footer text',
+ *   ts: Date.now() / 1000
+ * }];
+ *
  * postSlackMessage(
  *   'xoxb-your-token',
  *   '#general',
- *   'アタッチメント付きメッセージ',
+ *   'Message with rich formatting',
  *   {
- *     attachments: JSON.stringify([{
- *       title: 'タイトル',
- *       text: '詳細な内容をここに'
- *     }])
+ *     attachments: JSON.stringify(attachmentData)
  *   }
  * );
  */
@@ -60,10 +71,46 @@ function postSlackMessage(
   text: string,
   options: Partial<Omit<ChatPostMessageArguments, 'channel' | 'text'>> = {}
 ): SlackApiResponse {
-  const client = new WebClient(token);
-  return client.chat.postMessage({
+  const web = createWebClient(token);
+  return web.chat.postMessage({
     channel: channelId,
     text,
     ...options,
+  });
+}
+
+/**
+ * Tests the postSlackMessage function by sending a simple text message and a rich message with attachments.
+ */
+function testPostSlackMessage() {
+  // Send a simple text message
+  const token = 'xoxb-your';
+  const channelId = '#general';
+  const text = 'Hello from Google Apps Script!';
+  postSlackMessage(token, channelId, text);
+
+  // Send a rich message with attachments
+  const attachmentData = [
+    {
+      color: '#36a64f',
+      pretext: 'Optional pretext that appears above the attachment',
+      author_name: 'Author Name',
+      author_link: 'http://example.com',
+      title: 'Attachment Title',
+      title_link: 'http://example.com',
+      text: 'Main attachment text that can include *markdown*',
+      fields: [
+        {
+          title: 'Field Title',
+          value: 'Field value and formatting',
+          short: true,
+        },
+      ],
+      footer: 'Footer text',
+      ts: Date.now() / 1000,
+    },
+  ];
+  postSlackMessage(token, channelId, 'Message with rich formatting', {
+    attachments: JSON.stringify(attachmentData),
   });
 }
