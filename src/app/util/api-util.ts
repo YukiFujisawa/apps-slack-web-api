@@ -23,6 +23,10 @@ export class ApiUtil {
     maxRetries: number = 3,
     initialBackoffMs: number = 1000
   ): T {
+    if (maxRetries <= 0) {
+      throw new Error('Max retries exceeded');
+    }
+
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       try {
         return operation();
