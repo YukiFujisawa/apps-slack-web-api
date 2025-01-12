@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 declare namespace SlackWebApi {
   interface WebClient {
     chat: {
