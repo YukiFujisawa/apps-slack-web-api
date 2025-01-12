@@ -17,6 +17,9 @@ TypeScript で書かれた Google Apps Script 用の Slack Web API 用のライ�
 2. スクリプト ID を入力: `1TygC_BEClAGRFhVkq66ZRjKkXd1lSXKgPwcyM-0ruwUPU9K8_PAMl9FT`
 3. 最新バージョンを選択して「追加」
 
+![スクリーンショット 2025-01-12 11 38 39](https://github.com/user-attachments/assets/9e357f00-99d9-4e97-b0cf-d99fe74d6871)
+
+
 ## 基本的な使い方 / Basic Usage
 
 ### シンプルなメッセージを送信 / Sending a Simple Message
