@@ -82,7 +82,7 @@ function postChatMessage(
 /**
  * Tests the postChatMessage function by sending a simple text message and a rich message with attachments.
  */
-function testpostChatMessage() {
+function testPostChatMessage() {
   // Send a simple text message
   const token = 'xoxb-your';
   const channelId = '#general';
