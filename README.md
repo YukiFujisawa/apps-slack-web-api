@@ -84,11 +84,6 @@ function useWebClient() {
 }
 ```
 
-## 制限事項 / Limitations
-
-- Rate limiting は手動で管理する必要があります
-- chat.postMessage 以外の機能は未実装です
-
 ## コントリビューション / Contributing
 
 プルリクエストや Issue は大歓迎です。
