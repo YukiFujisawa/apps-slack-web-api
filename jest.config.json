@@ -5,5 +5,19 @@
   "testPathIgnorePatterns": ["<rootDir>/dist/", "<rootDir>/build/"],
   "moduleNameMapper": {
     "(.+)\\.js": "$1"
-  }
+  },
+  "setupFiles": ["<rootDir>/test/setup.ts"],
+  "transform": {
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        "tsconfig": "tsconfig.json"
+      }
+    ]
+  },
+  "testMatch": ["**/__tests__/**/*.ts", "**/?(*.)+(spec|test).ts"],
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["text", "lcov"],
+  "coveragePathIgnorePatterns": ["/node_modules/", "/test/", "/dist/"]
 }
