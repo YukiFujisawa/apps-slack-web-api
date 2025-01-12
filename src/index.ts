@@ -82,35 +82,35 @@ function postChatMessage(
 /**
  * Tests the postChatMessage function by sending a simple text message and a rich message with attachments.
  */
-function testPostChatMessage() {
-  // Send a simple text message
-  const token = 'xoxb-your';
-  const channelId = '#general';
-  const text = 'Hello from Google Apps Script!';
-  postChatMessage(token, channelId, text);
+// function testPostChatMessage() {
+//   // Send a simple text message
+//   const token = 'xoxb-your';
+//   const channelId = '#general';
+//   const text = 'Hello from Google Apps Script!';
+//   postChatMessage(token, channelId, text);
 
-  // Send a rich message with attachments
-  const attachmentData = [
-    {
-      color: '#36a64f',
-      pretext: 'Optional pretext that appears above the attachment',
-      author_name: 'Author Name',
-      author_link: 'http://example.com',
-      title: 'Attachment Title',
-      title_link: 'http://example.com',
-      text: 'Main attachment text that can include *markdown*',
-      fields: [
-        {
-          title: 'Field Title',
-          value: 'Field value and formatting',
-          short: true,
-        },
-      ],
-      footer: 'Footer text',
-      ts: Date.now() / 1000,
-    },
-  ];
-  postChatMessage(token, channelId, 'Message with rich formatting', {
-    attachments: JSON.stringify(attachmentData),
-  });
-}
+//   // Send a rich message with attachments
+//   const attachmentData = [
+//     {
+//       color: '#36a64f',
+//       pretext: 'Optional pretext that appears above the attachment',
+//       author_name: 'Author Name',
+//       author_link: 'http://example.com',
+//       title: 'Attachment Title',
+//       title_link: 'http://example.com',
+//       text: 'Main attachment text that can include *markdown*',
+//       fields: [
+//         {
+//           title: 'Field Title',
+//           value: 'Field value and formatting',
+//           short: true,
+//         },
+//       ],
+//       footer: 'Footer text',
+//       ts: Date.now() / 1000,
+//     },
+//   ];
+//   postChatMessage(token, channelId, 'Message with rich formatting', {
+//     attachments: JSON.stringify(attachmentData),
+//   });
+// }
