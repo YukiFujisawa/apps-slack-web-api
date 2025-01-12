@@ -9,7 +9,9 @@
     ".github",
     "CONTRIBUTING",
     "build",
-    "dist"
+    "src",
+    "test",
+    "README.md"
   ],
   "license": "license-header.txt",
   "licenseFormats": {
